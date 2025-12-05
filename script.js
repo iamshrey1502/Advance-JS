@@ -1,32 +1,61 @@
-// class Bottle{//class kyu banahye-> hrr baar ek naya object bnane ke liye
-//     constructor(){//automatic function that runs bydefault
-//         this.color="blue";
-//         this.material="plastic",
-//         this.price="132"
-//     }
-//     fill(){ }
-//     drink(){ }
-// }
+// this-> special keyword in JS which keep changing its value 
+//Object->function->method
 
+// global->window
+// function->window
+// ES5 function inside object->object
+// ES6 function inside object->window
+// ES5 function inside ES5 function inside object->window
+// ES6 function inside ES5 function inside object->object
+// inside eventlistener->same guy on which event is added
 
-// let bottle1=new Bottle();
-// console.log(bottle1);
-
-// let bottle2=new Bottle();
-// console.log(bottle2);
-
-//prototypes-> shared memory
-class Sketch{
-    constructor(){// no multiple constructors inside one class, only single constructor 
-        this.character="Doraemon";
-        this.color="blue";
-    }
-    // speak() { }
-    // walk() { }//like this bydefault methods outside constructor are added inside shared memory
+console.log(this);
+function abcd(){
+    console.log(this);
 }
+abcd();
+let obj={
+    name:"Shrey",
+    fnc:function(){
+        console.log(this.name);
+    }
+}
+obj.fnc();
 
-Sketch.prototype.speak=function(){};//these two functions are automatically added in every object from this class
-Sketch.prototype.walk=function(){};//these two functions are in the shared memory
+let obj2={
+    name:"Shrey",
+    fnc:()=>{
+        console.log(this);
+    }
+}
+obj2.fnc();
 
-let sketch1=new Sketch();
-console.log(sketch1);
+let obj3={
+    fnc:function(){
+        function abcd(){
+            console.log(this);
+        }
+        abcd();
+    }
+}
+obj3.fnc();
+
+let obj4={
+    fnc:function(){
+        let abcd=()=>{
+            console.log(this);
+        }
+        abcd();
+    }
+}
+obj4.fnc();
+
+let defg=()=>{
+    console.log(this);
+}
+defg();
+
+let h1=document.querySelector("h1");
+h1.addEventListener("click",function(){
+    console.log(this);
+});
