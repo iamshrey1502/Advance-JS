@@ -1,61 +1,18 @@
-// this-> special keyword in JS which keep changing its value 
-//Object->function->method
+//call/apply/bind -> ek function mein this ki value window hoti aur agr aap chahte h wo window na ho
+//par koi aur object ho tb aap use kr skte h call, apply and bind.
 
-// global->window
-// function->window
-// ES5 function inside object->object
-// ES6 function inside object->window
-// ES5 function inside ES5 function inside object->window
-// ES6 function inside ES5 function inside object->object
-// inside eventlistener->same guy on which event is added
-
-console.log(this);
-function abcd(){
-    console.log(this);
-}
-abcd();
 let obj={
     name:"Shrey",
-    fnc:function(){
-        console.log(this.name);
-    }
 }
-obj.fnc();
 
-let obj2={
-    name:"Shrey",
-    fnc:()=>{
-        console.log(this);
-    }
+function abcd(a,b,c){
+    console.log(this,a,b,c);
 }
-obj2.fnc();
+// abcd.call(obj,1,2,3);// runs the function and set the value for this keyword
 
-let obj3={
-    fnc:function(){
-        function abcd(){
-            console.log(this);
-        }
-        abcd();
-    }
-}
-obj3.fnc();
+// abcd.apply(obj,[1,2,3]);// same concept as call but instead of passing values directly we pass it in the form of array
 
-let obj4={
-    fnc:function(){
-        let abcd=()=>{
-            console.log(this);
-        }
-        abcd();
-    }
-}
-obj4.fnc();
+let newfnc=abcd.bind(obj,1,2,3);// same concept, returns a new function doesnt directly call a function
+newfnc();
 
-let defg=()=>{
-    console.log(this);
-}
-defg();
-
-let h1=document.querySelector("h1");
-h1.addEventListener("click",function(){
-    console.log(this);
-});
+// function-> holds this value, fat arrow function-> takes value from parent
